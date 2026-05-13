@@ -12,9 +12,9 @@ use Medas\RestRequestHandlerGenerator\{ClassGenerator, Templates};
 readonly class CreatePutInstance extends BaseConsoleCommand
 {
     public function __construct(
-        private ClassGenerator          $classGenerator,
-        private RestRequestHandlerGroup $group,
-        private Templates               $templates,
+        private ClassGenerator        $classGenerator,
+        private HandlerGeneratorGroup $group,
+        private Templates             $templates,
     )
     {
     }

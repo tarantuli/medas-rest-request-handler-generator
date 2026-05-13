@@ -17,15 +17,15 @@ use Medas\RestRequestHandlerGenerator\{
 readonly class CreateAllControllers extends BaseConsoleCommand
 {
     public function __construct(
-        private ClassGenerator          $classGenerator,
-        private RestRequestHandlerGroup $group,
-        private Templates               $templates,
+        private ClassGenerator        $classGenerator,
+        private HandlerGeneratorGroup $group,
+        private Templates             $templates,
 
         #[ConfigValue(CreateDeleteController::class)]
-        private bool                    $createDeleteController = true,
+        private bool                  $createDeleteController = true,
 
         #[ConfigValue(CreateCountController::class)]
-        private bool                    $createCountController = false,
+        private bool                  $createCountController = false,
     )
     {
     }
