@@ -1,8 +1,9 @@
 {
-  "name": "morphp/medas-placeholder",
-  "description": "Medas placeholder",
+  "name": "morphp/medas-rest-request-handler-generator",
+  "description": "Medas REST request handler generator.",
   "keywords": [
-    "placeholder"
+    "http",
+    "entities"
   ],
   "authors": [
     {
@@ -12,7 +13,9 @@
   ],
   "type": "library",
   "require": {
+    "morphp/medas-console": "^3",
     "morphp/medas-core": "^3",
+    "morphp/medas-entity-generator": "^1",
     "php": "^8.4"
   },
   "require-dev": {
@@ -22,12 +25,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Medas\\Placeholder\\": "src/"
+      "Medas\\RestRequestHandlerGenerator\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Medas\\PlaceholderTest\\": "tests/"
+      "Medas\\RestRequestHandlerGeneratorTest\\": "tests/"
     }
   }
 }
