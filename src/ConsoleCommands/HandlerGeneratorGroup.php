@@ -8,7 +8,7 @@ use Medas\Console\Commands\{BaseConsoleCommandGroup, ConsoleCommandGroup};
 use Medas\Core\Attributes\Service;
 
 #[Service]
-readonly class RestRequestHandlerGroup extends BaseConsoleCommandGroup
+readonly class HandlerGeneratorGroup extends BaseConsoleCommandGroup
 {
     public function parent(): ConsoleCommandGroup|null
     {
@@ -17,6 +17,6 @@ readonly class RestRequestHandlerGroup extends BaseConsoleCommandGroup
 
     public function name(): string
     {
-        return 'rest-request-handler';
+        return 'rest-request-handler-generator';
     }
 }
