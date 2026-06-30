@@ -491,10 +491,10 @@ readonly class {{shortClassName}} implements EntityNormalizer
     {
     }
 
-    public function normalizeAndSerialize(object {{instanceVariable}}): array
+    public function normalizeAndSerialize(object $entity): array
     {
-        /** @var \{{entityClassName}} {{instanceVariable}} */
-        $data = get_object_vars({{instanceVariable}});
+        /** @var \{{entityClassName}} $entity */
+        $data = get_object_vars($entity);
 
         array_walk($data, function (&$value) {
             $value = $this->serializer->serialize($value);
