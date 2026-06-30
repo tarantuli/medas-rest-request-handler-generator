@@ -604,4 +604,33 @@ readonly class {{shortClassName}}
 }
 PHP;
     }
+
+    public function singleVoteHandler(): string
+    {
+        return <<<'PHP'
+<?php
+
+declare(strict_types=1);
+
+namespace {{namespace}};
+
+use Medas\Core\Attributes\Service;
+
+#[Service]
+readonly class {{shortClassName}}
+{
+}
+PHP;
+    }
+
+    public function singleVoteHandlerMethod(): string
+    {
+        return <<<'PHP'
+
+    #[EventListener]
+    public function {{methodName}}(\{{voteClassName}} $vote): void
+    {
+    }
+PHP;
+    }
 }

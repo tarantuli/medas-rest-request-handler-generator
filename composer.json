@@ -16,6 +16,7 @@
     "morphp/medas-console": "^3",
     "morphp/medas-core": "^4",
     "morphp/medas-entity-generator": "^1",
+    "morphp/medas-php-class-analysis": "^3",
     "php": "^8.4"
   },
   "require-dev": {

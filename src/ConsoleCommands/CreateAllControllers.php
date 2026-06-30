@@ -10,22 +10,28 @@ use Medas\RestRequestHandlerGenerator\{
     ClassGenerator,
     ConfigOptions\CreateCountController,
     ConfigOptions\CreateDeleteController,
-    Templates
+    ConfigOptions\CreateSingleVoteHandlers,
+    Templates,
+    VoteHandlerMethodInjector
 };
 
 #[Service]
 readonly class CreateAllControllers extends BaseConsoleCommand
 {
     public function __construct(
-        private ClassGenerator        $classGenerator,
-        private HandlerGeneratorGroup $group,
-        private Templates             $templates,
+        private ClassGenerator            $classGenerator,
+        private HandlerGeneratorGroup     $group,
+        private Templates                 $templates,
+        private VoteHandlerMethodInjector $voteHandlerMethodInjector,
 
         #[ConfigValue(CreateDeleteController::class)]
-        private bool                  $createDeleteController = true,
+        private bool                      $createDeleteController = true,
 
         #[ConfigValue(CreateCountController::class)]
-        private bool                  $createCountController = false,
+        private bool                      $createCountController = false,
+
+        #[ConfigValue(CreateSingleVoteHandlers::class)]
+        private bool                      $createSingleVoteHandlers = true,
     )
     {
     }
@@ -173,6 +179,33 @@ readonly class CreateAllControllers extends BaseConsoleCommand
             unset($prefixes['Delete']);
         }
 
+        if ($this->createSingleVoteHandlers) {
+            $this->singleVoteHandlerAuthorization($entityClassName, $prefixes);
+        }
+        else {
+            foreach ($prefixes as $prefix => $template) {
+                $voteClassName = $this->classGenerator->generate(
+                    $entityClassName,
+                    $template,
+                    'Authorization\\' . $prefix,
+                    'Vote',
+                );
+
+                $this->classGenerator->generate(
+                    $entityClassName,
+                    $this->templates->crudVoteHandler(),
+                    'Authorization\\' . $prefix,
+                    'VoteHandler',
+                    ['{{voteClassName}}' => $voteClassName]
+                );
+            }
+        }
+    }
+
+    private function singleVoteHandlerAuthorization(string $entityClassName, array $prefixes): void
+    {
+        $handlerClassName = null;
+
         foreach ($prefixes as $prefix => $template) {
             $voteClassName = $this->classGenerator->generate(
                 $entityClassName,
@@ -181,13 +214,20 @@ readonly class CreateAllControllers extends BaseConsoleCommand
                 'Vote',
             );
 
-            $this->classGenerator->generate(
+            // the handler class name does not depend on $prefix, since all vote types
+            // share a single handler class; whichever prefix is generated first simply
+            // determines the file location for all of them
+            $handlerClassName ??= $this->classGenerator->generate(
                 $entityClassName,
-                $this->templates->crudVoteHandler(),
-                'Authorization\\' . $prefix,
+                $this->templates->singleVoteHandler(),
+                'Authorization',
                 'VoteHandler',
-                ['{{voteClassName}}' => $voteClassName]
             );
+
+            $this->voteHandlerMethodInjector->addMethodIfMissing($handlerClassName, 'handle' . $prefix, $this->templates->singleVoteHandlerMethod(), [
+                '{{methodName}}' => 'handle' . $prefix,
+                '{{voteClassName}}' => $voteClassName,
+            ]);
         }
     }
 }

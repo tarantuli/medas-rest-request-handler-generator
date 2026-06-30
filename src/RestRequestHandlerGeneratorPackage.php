@@ -7,6 +7,7 @@ namespace Medas\RestRequestHandlerGenerator;
 use Medas\Console\ConsolePackage;
 use Medas\Core\{AsSingleton, BasePackage};
 use Medas\EntityGenerator\EntityGeneratorPackage;
+use Medas\PhpClassAnalysis\PhpClassAnalysisPackage;
 
 class RestRequestHandlerGeneratorPackage extends BasePackage
 {
@@ -17,6 +18,7 @@ class RestRequestHandlerGeneratorPackage extends BasePackage
         return [
             ConsolePackage::instance(),
             EntityGeneratorPackage::instance(),
+            PhpClassAnalysisPackage::instance(),
         ];
     }
 

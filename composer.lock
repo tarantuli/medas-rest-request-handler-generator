@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0a0d597cd86f56e975bd6cafb6d3f684",
+    "content-hash": "88cceba80fed1780a271cb1e5da78b3a",
     "packages": [
         {
             "name": "morphp/medas-console",
@@ -207,6 +207,110 @@
                 "issues": "https://github.com/tarantuli/medas-file-system/issues"
             },
             "time": "2026-06-15T09:50:47+00:00"
+        },
+        {
+            "name": "morphp/medas-php-class-analysis",
+            "version": "v3.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tarantuli/medas-php-class-analysis.git",
+                "reference": "872c205d133dc8caeb3ab02ff09cf6879c950692"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tarantuli/medas-php-class-analysis/zipball/872c205d133dc8caeb3ab02ff09cf6879c950692",
+                "reference": "872c205d133dc8caeb3ab02ff09cf6879c950692",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "morphp/medas-core": "^4",
+                "morphp/medas-php-tokenizer": "^3",
+                "php": "^8.4"
+            },
+            "require-dev": {
+                "morphp/medas-object-instantiator": "^4",
+                "morphp/medas-service-manager": "^4",
+                "phpunit/phpunit": "^10"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Medas\\PhpClassAnalysis\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Medas\\PhpClassAnalysisTest\\": "tests/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Patrick Morpey",
+                    "email": "patrick@morphp.nl"
+                }
+            ],
+            "description": "Medas PHP class analysis",
+            "keywords": [
+                "backend"
+            ],
+            "support": {
+                "source": "https://github.com/tarantuli/medas-php-class-analysis/tree/v3.1.3",
+                "issues": "https://github.com/tarantuli/medas-php-class-analysis/issues"
+            },
+            "time": "2026-06-19T11:12:27+00:00"
+        },
+        {
+            "name": "morphp/medas-php-tokenizer",
+            "version": "v3.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tarantuli/medas-php-tokenizer.git",
+                "reference": "f8af62fa5f8ae791d4db76e1505179bf72d6bca6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tarantuli/medas-php-tokenizer/zipball/f8af62fa5f8ae791d4db76e1505179bf72d6bca6",
+                "reference": "f8af62fa5f8ae791d4db76e1505179bf72d6bca6",
+                "shasum": ""
+            },
+            "require": {
+                "morphp/medas-console": "^3",
+                "morphp/medas-core": "^4",
+                "php": "^8.4"
+            },
+            "require-dev": {
+                "morphp/medas-console-printer": "^4",
+                "morphp/medas-object-instantiator": "^4",
+                "morphp/medas-service-manager": "^4",
+                "phpunit/phpunit": "^10"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Medas\\PhpTokenizer\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Medas\\PhpTokenizerTest\\": "tests/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Patrick Morpey",
+                    "email": "patrick@morphp.nl"
+                }
+            ],
+            "description": "Medas PHP tokenizer",
+            "keywords": [
+                "backend"
+            ],
+            "support": {
+                "source": "https://github.com/tarantuli/medas-php-tokenizer/tree/v3.1.4",
+                "issues": "https://github.com/tarantuli/medas-php-tokenizer/issues"
+            },
+            "time": "2026-06-25T10:33:06+00:00"
         },
         {
             "name": "psr/event-dispatcher",
