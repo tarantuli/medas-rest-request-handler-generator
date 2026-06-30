@@ -220,7 +220,7 @@ readonly class CreateAllControllers extends BaseConsoleCommand
             $handlerClassName ??= $this->classGenerator->generate(
                 $entityClassName,
                 $this->templates->singleVoteHandler(),
-                'Authorization',
+                'Authorization\\',
                 'VoteHandler',
             );
 

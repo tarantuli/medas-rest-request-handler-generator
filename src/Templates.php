@@ -614,7 +614,7 @@ declare(strict_types=1);
 
 namespace {{namespace}};
 
-use Medas\Core\Attributes\Service;
+use Medas\Core\Attributes\{EventListener, Service};
 
 #[Service]
 readonly class {{shortClassName}}
