@@ -10,8 +10,7 @@ use Medas\EntityGenerator\{
     ConfigOptions\RootNamespace,
     Exceptions\ClassHasNoNamespace,
     FileNameFinder,
-    FileWriter,
-    NameConverters\NameConverter
+    FileWriter
 };
 
 #[Service]
@@ -21,7 +20,7 @@ readonly class ClassGenerator
         private ClassNameNormalizer $classNameNormalizer,
         private FileNameFinder      $fileNameFinder,
         private FileWriter          $fileWriter,
-        private NameConverter       $storeNameConverter,
+        private KebabCaseNames      $routeNameConverter,
 
         #[ConfigValue(ConfigOptions\HandlerClassNamePattern::class)]
         private string              $handlerClassNamePattern,
@@ -168,7 +167,7 @@ readonly class ClassGenerator
     ): string
     {
         [, $entityShortClassName] = $this->splitClassName($entityClassName);
-        $routePath = $this->storeNameConverter->convert($entityShortClassName);
+        $routePath = $this->routeNameConverter->convert($entityShortClassName);
         [$namespace, $shortClassName] = $this->splitClassName($handlerClassName);
         $instanceVariable = '$' . lcfirst($entityShortClassName);
 

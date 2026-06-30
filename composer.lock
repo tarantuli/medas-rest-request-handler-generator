@@ -105,16 +105,16 @@
         },
         {
             "name": "morphp/medas-entity-generator",
-            "version": "v1.0.9",
+            "version": "v1.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tarantuli/medas-entity-generator.git",
-                "reference": "9475a94db0ddfc48adb47502483126493a07017c"
+                "reference": "27487b1dd3e4ada1677033c074ee7085f11ee446"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tarantuli/medas-entity-generator/zipball/9475a94db0ddfc48adb47502483126493a07017c",
-                "reference": "9475a94db0ddfc48adb47502483126493a07017c",
+                "url": "https://api.github.com/repos/tarantuli/medas-entity-generator/zipball/27487b1dd3e4ada1677033c074ee7085f11ee446",
+                "reference": "27487b1dd3e4ada1677033c074ee7085f11ee446",
                 "shasum": ""
             },
             "require": {
@@ -152,10 +152,10 @@
                 "entities"
             ],
             "support": {
-                "source": "https://github.com/tarantuli/medas-entity-generator/tree/v1.0.9",
+                "source": "https://github.com/tarantuli/medas-entity-generator/tree/v1.0.10",
                 "issues": "https://github.com/tarantuli/medas-entity-generator/issues"
             },
-            "time": "2026-06-15T10:52:03+00:00"
+            "time": "2026-06-30T10:56:29+00:00"
         },
         {
             "name": "morphp/medas-file-system",
