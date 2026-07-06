@@ -63,14 +63,14 @@ readonly class CreateAllControllers extends BaseConsoleCommand
 
     public function options(): array
     {
-        return [new Option('id')];
+        return [new Option('int')];
     }
 
     public function process(CommandInput $input): void
     {
         $entityClassName = $input->getArgument(1);
 
-        $this->requestHandlers($entityClassName, $input->hasOption('id'));
+        $this->requestHandlers($entityClassName, !$input->hasOption('int'));
         $this->helpers($entityClassName);
         $this->authorization($entityClassName);
     }

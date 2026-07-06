@@ -46,7 +46,7 @@ readonly class CreateGetInstance extends BaseConsoleCommand
 
     public function options(): array
     {
-        return [new Option('id')];
+        return [new Option('int')];
     }
 
     public function process(CommandInput $input): void
@@ -55,7 +55,7 @@ readonly class CreateGetInstance extends BaseConsoleCommand
 
         $this->classGenerator->generate(
             $entityClassName,
-            $input->hasOption('id')
+            !$input->hasOption('int')
                 ? $this->templates->getInstanceByUuid()
                 : $this->templates->getInstanceByInteger(),
             'Get',
