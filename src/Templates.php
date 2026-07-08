@@ -375,6 +375,7 @@ declare(strict_types=1);
 
 namespace {{namespace}};
 
+use Medas\Core\Events\AllowedAccess;
 use Medas\EntityManager\Repository;
 use Medas\HttpRequestHandler\{Exceptions\RequestNotAuthorized, RequestFactory};
 use Medas\RestRequestHandler\{
@@ -407,11 +408,14 @@ readonly class {{shortClassName}}
         $entities = $this->repository->fetch($selector);
 
         foreach ($entities as {{instanceVariable}}) {
-            allowElseThrow(
-                $vote = new \{{readVoteClassName}}({{instanceVariable}}),
-                new RequestNotAuthorized($vote->allowedAccess)
-            );
+            $vote = dispatch(new \{{readVoteClassName}}({{instanceVariable}}));
+
+            if ($vote->allowedAccess !== AllowedAccess::Allowed) {
+                unset($entities[$i]);
+            }        
         }
+
+        $entities = array_values($entities);
 
         $entities = array_map(
             fn({{instanceVariable}}) => $this->normalizer->normalizeAndSerialize({{instanceVariable}}),
@@ -476,6 +480,7 @@ declare(strict_types=1);
 namespace {{namespace}};
 
 use Medas\Core\{Attributes\PreferredDefault, Attributes\Service, Interfaces\Serializer};
+use Medas\EntityManager\{MetaData, MetaDataManager};
 use Medas\RestRequestHandler\{
     Interfaces\EntityNormalizer,
     Serializers\RestSerializer
@@ -484,11 +489,15 @@ use Medas\RestRequestHandler\{
 #[Service]
 readonly class {{shortClassName}} implements EntityNormalizer
 {
+    private MetaData $metaData;
+
     public function __construct(
         #[PreferredDefault(RestSerializer::class)]
         private Serializer $serializer,
+        MetaDataManager    $metaDataManager,
     )
     {
+        $this->metaData = $metaDataManager->get(\{{entityClassName}}::class);
     }
 
     public function normalizeAndSerialize(object $entity): array
@@ -505,8 +514,9 @@ readonly class {{shortClassName}} implements EntityNormalizer
 
     public function unserializeAndDenormalize(array $data): array
     {
-        array_walk($data, function (&$value) {
-            $value = $this->serializer->unserialize($value);
+        array_walk($data, function (&$value, $name) {
+            $type = $this->metaData->property($name, ignoreUnknownProperties: true)?->type;
+            $value = $this->serializer->unserialize($value, $type);
         });
 
         return $data;
