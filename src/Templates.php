@@ -407,7 +407,7 @@ readonly class {{shortClassName}}
         /** @var \{{entityClassName}}[] $entities */
         $entities = $this->repository->fetch($selector);
 
-        foreach ($entities as {{instanceVariable}}) {
+        foreach ($entities as $i => {{instanceVariable}}) {
             $vote = dispatch(new \{{readVoteClassName}}({{instanceVariable}}));
 
             if ($vote->allowedAccess !== AllowedAccess::Allowed) {
