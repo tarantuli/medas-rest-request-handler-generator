@@ -24,7 +24,7 @@ use Medas\HttpRequestHandler\Exceptions\RequestNotAuthorized;
 use Medas\RestRequestHandler\Responses\EntityResponse;
 use Medas\Routing\{Methods\Get, Parameters\Uuid, Route};
 
-#[Route('{{routePath}}')]
+#[Route('{{routePath}}', endpointForEntity: \{{entityClassName}}::class)]
 readonly class {{shortClassName}}
 {
     public function __construct(
@@ -68,7 +68,7 @@ use Medas\HttpRequestHandler\Exceptions\RequestNotAuthorized;
 use Medas\RestRequestHandler\Responses\EntityResponse;
 use Medas\Routing\{Methods\Get, Parameters\Integer, Route};
 
-#[Route('{{routePath}}')]
+#[Route('{{routePath}}', endpointForEntity: \{{entityClassName}}::class)]
 readonly class {{shortClassName}}
 {
     public function __construct(
@@ -113,7 +113,7 @@ use Medas\HttpRequestHandler\{Exceptions\RequestNotAuthorized, RequestFactory};
 use Medas\RestRequestHandler\Responses\EntityResponse;
 use Medas\Routing\{Methods\Put, Parameters\Uuid, Route};
 
-#[Route('{{routePath}}')]
+#[Route('{{routePath}}', endpointForEntity: \{{entityClassName}}::class)]
 readonly class {{shortClassName}}
 {
     public function __construct(
@@ -172,7 +172,7 @@ use Medas\HttpRequestHandler\{Exceptions\RequestNotAuthorized, RequestFactory};
 use Medas\RestRequestHandler\Responses\EntityResponse;
 use Medas\Routing\{Methods\Put, Parameters\Integer, Route};
 
-#[Route('{{routePath}}')]
+#[Route('{{routePath}}', endpointForEntity: \{{entityClassName}}::class)]
 readonly class {{shortClassName}}
 {
     public function __construct(
@@ -236,7 +236,7 @@ use Medas\RestRequestHandler\{
 };
 use Medas\Routing\{Methods\Post, Route};
 
-#[Route('{{routePath}}')]
+#[Route('{{routePath}}', endpointForEntity: \{{entityClassName}}::class)]
 readonly class {{shortClassName}}
 {
     public function __construct(
@@ -292,7 +292,7 @@ use Medas\HttpRequestHandler\Exceptions\RequestNotAuthorized;
 use Medas\RestRequestHandler\Responses\SuccessResponse;
 use Medas\Routing\{Methods\Delete, Parameters\Uuid, Route};
 
-#[Route('{{routePath}}')]
+#[Route('{{routePath}}', endpointForEntity: \{{entityClassName}}::class)]
 readonly class {{shortClassName}}
 {
     public function __construct(
@@ -336,7 +336,7 @@ use Medas\HttpRequestHandler\Exceptions\RequestNotAuthorized;
 use Medas\RestRequestHandler\Responses\SuccessResponse;
 use Medas\Routing\{Methods\Delete, Parameters\Integer, Route};
 
-#[Route('{{routePath}}')]
+#[Route('{{routePath}}', endpointForEntity: \{{entityClassName}}::class)]
 readonly class {{shortClassName}}
 {
     public function __construct(
@@ -384,7 +384,7 @@ use Medas\RestRequestHandler\{
 };
 use Medas\Routing\{Methods\Get, Route};
 
-#[Route('{{routePath}}')]
+#[Route('{{routePath}}', endpointForEntity: \{{entityClassName}}::class)]
 readonly class {{shortClassName}}
 {
     public function __construct(
@@ -446,7 +446,7 @@ use Medas\RestRequestHandler\{
 use Medas\HttpRequestHandler\RequestFactory;
 use Medas\Routing\{Methods\Get, Parameters\Constant, Route};
 
-#[Route('{{routePath}}')]
+#[Route('{{routePath}}', endpointForEntity: \{{entityClassName}}::class)]
 readonly class {{shortClassName}}
 {
     public function __construct(
