@@ -375,23 +375,15 @@ declare(strict_types=1);
 
 namespace {{namespace}};
 
-use Medas\Core\Events\AllowedAccess;
-use Medas\EntityManager\Repository;
-use Medas\HttpRequestHandler\{Exceptions\RequestNotAuthorized, RequestFactory};
-use Medas\RestRequestHandler\{
-    Filtering\SelectorBuilder,
-    Responses\CollectionResponse
-};
+use Medas\RestRequestHandler\{Handlers\GetCollectionHandler, Responses\CollectionResponse};
 use Medas\Routing\{Methods\Get, Route};
 
 #[Route('{{routePath}}', endpointForEntity: \{{entityClassName}}::class)]
 readonly class {{shortClassName}}
 {
     public function __construct(
-        private Repository $repository,
-        private RequestFactory $requestFactory,
-        private SelectorBuilder $selectorBuilder,
         private \{{normalizerClassName}} $normalizer,
+        private GetCollectionHandler $handler,
     )
     {
     }
@@ -399,29 +391,13 @@ readonly class {{shortClassName}}
     #[Get]
     public function handle(): CollectionResponse
     {
-        $selector = $this->selectorBuilder->build(
-            \{{entityClassName}}::class, 
-            $this->requestFactory->get()->uri->query
+        return $this->handler->handle(
+            \{{entityClassName}}::class,
+            \{{readVoteClassName}}::class,
+            $this->normalizer,
+            // pass a constructor-injected QuerySelector instance as a 4th
+            // argument if this entity supports ?query= search
         );
-        
-        /** @var \{{entityClassName}}[] $entities */
-        $entities = $this->repository->fetch($selector);
-
-        foreach ($entities as $i => {{instanceVariable}}) {
-            $vote = dispatch(new \{{readVoteClassName}}({{instanceVariable}}));
-
-            if ($vote->allowedAccess !== AllowedAccess::Allowed) {
-                unset($entities[$i]);
-            }        
-        }
-
-        $entities = array_values($entities);
-
-        $entities = array_map(
-            fn({{instanceVariable}}) => $this->normalizer->normalizeAndSerialize({{instanceVariable}}),
-            $entities
-        );
-        return new CollectionResponse($entities);
     }
 }
 
