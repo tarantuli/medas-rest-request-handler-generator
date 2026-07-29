@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Medas\RestRequestHandlerGenerator\ConsoleCommands;
 
-use Medas\Console\Commands\{BaseConsoleCommand, CommandInput, ConsoleCommandGroup, Range};
+use Medas\Console\Commands\{Argument, BaseConsoleCommand, CommandInput, ConsoleCommandGroup};
 use Medas\Core\Attributes\Service;
 use Medas\RestRequestHandlerGenerator\{ClassGenerator, Templates};
 
@@ -39,14 +39,16 @@ readonly class CreateRestNormalizer extends BaseConsoleCommand
         return 'Creates a REST normalizer for the given entity';
     }
 
-    public function allowedArgumentCount(): Range
+    public function arguments(): array
     {
-        return new Range(1);
+        return [
+            Argument::required('entityClassName'),
+        ];
     }
 
     public function process(CommandInput $input): void
     {
-        $entityClassName = $input->getArgument(1);
+        $entityClassName = $input->getArgument('entityClassName');
 
         $this->classGenerator->generate(
             $entityClassName,

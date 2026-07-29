@@ -4,7 +4,13 @@ declare(strict_types=1);
 
 namespace Medas\RestRequestHandlerGenerator\ConsoleCommands;
 
-use Medas\Console\Commands\{BaseConsoleCommand, CommandInput, ConsoleCommandGroup, Option, Range};
+use Medas\Console\Commands\{
+    Argument,
+    BaseConsoleCommand,
+    CommandInput,
+    ConsoleCommandGroup,
+    Option
+};
 use Medas\Core\Attributes\{ConfigValue, Service};
 use Medas\RestRequestHandlerGenerator\{
     ClassGenerator,
@@ -56,19 +62,21 @@ readonly class CreateAllControllers extends BaseConsoleCommand
         return 'Creates all CRUD controllers for a given entity class';
     }
 
-    public function allowedArgumentCount(): Range
-    {
-        return new Range(1);
-    }
-
     public function options(): array
     {
         return [new Option('int')];
     }
 
+    public function arguments(): array
+    {
+        return [
+            Argument::required('entityClassName'),
+        ];
+    }
+
     public function process(CommandInput $input): void
     {
-        $entityClassName = $input->getArgument(1);
+        $entityClassName = $input->getArgument('entityClassName');
 
         $this->requestHandlers($entityClassName, !$input->hasOption('int'));
         $this->helpers($entityClassName);
