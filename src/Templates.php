@@ -481,6 +481,13 @@ readonly class {{shortClassName}} implements EntityNormalizer
         /** @var \{{entityClassName}} $entity */
         $data = get_object_vars($entity);
 
+        // Back-references are inverse-navigation collections, not part of the
+        // entity's own representation - drop them so they aren't serialized
+        // (and, being lazy, aren't loaded just to be discarded).
+        foreach ($this->metaData->backReferences as $backReference) {
+            unset($data[$backReference->name]);
+        }
+
         array_walk($data, function (&$value) {
             $value = $this->serializer->serialize($value);
         });
