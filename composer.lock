@@ -8,19 +8,20 @@
     "packages": [
         {
             "name": "morphp/medas-console",
-            "version": "v4.0.0",
+            "version": "v4.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tarantuli/medas-console.git",
-                "reference": "a59d589ca3a00e57cb463e4b3c5bdbe86ddbd48d"
+                "reference": "871cbeb949b997ef8089b8bbbc67a511a287dfea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tarantuli/medas-console/zipball/a59d589ca3a00e57cb463e4b3c5bdbe86ddbd48d",
-                "reference": "a59d589ca3a00e57cb463e4b3c5bdbe86ddbd48d",
+                "url": "https://api.github.com/repos/tarantuli/medas-console/zipball/871cbeb949b997ef8089b8bbbc67a511a287dfea",
+                "reference": "871cbeb949b997ef8089b8bbbc67a511a287dfea",
                 "shasum": ""
             },
             "require": {
+                "ext-mbstring": "*",
                 "morphp/medas-core": "^3|^4",
                 "php": "^8.4"
             },
@@ -49,23 +50,23 @@
                 "console"
             ],
             "support": {
-                "source": "https://github.com/tarantuli/medas-console/tree/v4.0.0",
+                "source": "https://github.com/tarantuli/medas-console/tree/v4.1.1",
                 "issues": "https://github.com/tarantuli/medas-console/issues"
             },
-            "time": "2026-07-28T10:24:33+00:00"
+            "time": "2026-08-30T09:56:54+00:00"
         },
         {
             "name": "morphp/medas-core",
-            "version": "v4.2.5",
+            "version": "v4.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tarantuli/medas-core.git",
-                "reference": "73b30ce9d9bc026993ba1f92859877ff09bb8dfe"
+                "reference": "7f477b0c0c5e074546f1d53684bf5d4ec285925d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tarantuli/medas-core/zipball/73b30ce9d9bc026993ba1f92859877ff09bb8dfe",
-                "reference": "73b30ce9d9bc026993ba1f92859877ff09bb8dfe",
+                "url": "https://api.github.com/repos/tarantuli/medas-core/zipball/7f477b0c0c5e074546f1d53684bf5d4ec285925d",
+                "reference": "7f477b0c0c5e074546f1d53684bf5d4ec285925d",
                 "shasum": ""
             },
             "require": {
@@ -98,23 +99,23 @@
                 "medas"
             ],
             "support": {
-                "source": "https://github.com/tarantuli/medas-core/tree/v4.2.5",
+                "source": "https://github.com/tarantuli/medas-core/tree/v4.3.7",
                 "issues": "https://github.com/tarantuli/medas-core/issues"
             },
-            "time": "2026-07-27T08:10:04+00:00"
+            "time": "2026-09-01T10:38:38+00:00"
         },
         {
             "name": "morphp/medas-entity-generator",
-            "version": "v1.0.12",
+            "version": "v1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tarantuli/medas-entity-generator.git",
-                "reference": "5fe2543ef47a93e834502339766f39fc34daf6a6"
+                "reference": "61ef39eb2f0c88274fe82aa40cf19ac4bfdd0816"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tarantuli/medas-entity-generator/zipball/5fe2543ef47a93e834502339766f39fc34daf6a6",
-                "reference": "5fe2543ef47a93e834502339766f39fc34daf6a6",
+                "url": "https://api.github.com/repos/tarantuli/medas-entity-generator/zipball/61ef39eb2f0c88274fe82aa40cf19ac4bfdd0816",
+                "reference": "61ef39eb2f0c88274fe82aa40cf19ac4bfdd0816",
                 "shasum": ""
             },
             "require": {
@@ -152,10 +153,10 @@
                 "entities"
             ],
             "support": {
-                "source": "https://github.com/tarantuli/medas-entity-generator/tree/v1.0.12",
+                "source": "https://github.com/tarantuli/medas-entity-generator/tree/v1.2.2",
                 "issues": "https://github.com/tarantuli/medas-entity-generator/issues"
             },
-            "time": "2026-07-29T07:58:34+00:00"
+            "time": "2026-08-11T14:00:31+00:00"
         },
         {
             "name": "morphp/medas-file-system",
@@ -210,16 +211,16 @@
         },
         {
             "name": "morphp/medas-php-class-analysis",
-            "version": "v3.1.3",
+            "version": "v3.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tarantuli/medas-php-class-analysis.git",
-                "reference": "872c205d133dc8caeb3ab02ff09cf6879c950692"
+                "reference": "93e511386eea6adaa7e5ed6b06bafbda79902848"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tarantuli/medas-php-class-analysis/zipball/872c205d133dc8caeb3ab02ff09cf6879c950692",
-                "reference": "872c205d133dc8caeb3ab02ff09cf6879c950692",
+                "url": "https://api.github.com/repos/tarantuli/medas-php-class-analysis/zipball/93e511386eea6adaa7e5ed6b06bafbda79902848",
+                "reference": "93e511386eea6adaa7e5ed6b06bafbda79902848",
                 "shasum": ""
             },
             "require": {
@@ -255,10 +256,10 @@
                 "backend"
             ],
             "support": {
-                "source": "https://github.com/tarantuli/medas-php-class-analysis/tree/v3.1.3",
+                "source": "https://github.com/tarantuli/medas-php-class-analysis/tree/v3.1.4",
                 "issues": "https://github.com/tarantuli/medas-php-class-analysis/issues"
             },
-            "time": "2026-06-19T11:12:27+00:00"
+            "time": "2026-08-05T15:00:32+00:00"
         },
         {
             "name": "morphp/medas-php-tokenizer",
@@ -366,16 +367,16 @@
     "packages-dev": [
         {
             "name": "morphp/medas-object-instantiator",
-            "version": "v4.0.8",
+            "version": "v4.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tarantuli/medas-object-instantiator.git",
-                "reference": "34cb982c4d9c538b7526c44225656998b54a0519"
+                "reference": "c4421df1fe984fa295024c204482b99cc136206a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tarantuli/medas-object-instantiator/zipball/34cb982c4d9c538b7526c44225656998b54a0519",
-                "reference": "34cb982c4d9c538b7526c44225656998b54a0519",
+                "url": "https://api.github.com/repos/tarantuli/medas-object-instantiator/zipball/c4421df1fe984fa295024c204482b99cc136206a",
+                "reference": "c4421df1fe984fa295024c204482b99cc136206a",
                 "shasum": ""
             },
             "require": {
@@ -408,23 +409,23 @@
                 "services"
             ],
             "support": {
-                "source": "https://github.com/tarantuli/medas-object-instantiator/tree/v4.0.8",
+                "source": "https://github.com/tarantuli/medas-object-instantiator/tree/v4.0.9",
                 "issues": "https://github.com/tarantuli/medas-object-instantiator/issues"
             },
-            "time": "2026-07-22T08:46:54+00:00"
+            "time": "2026-08-27T07:30:24+00:00"
         },
         {
             "name": "morphp/medas-service-manager",
-            "version": "v4.0.14",
+            "version": "v4.0.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tarantuli/medas-service-manager.git",
-                "reference": "3c4d3a726093243a3b399be29a67da0702fb1161"
+                "reference": "2c281d9b8bc2e11edf9c80c3ec8febb76f3102fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tarantuli/medas-service-manager/zipball/3c4d3a726093243a3b399be29a67da0702fb1161",
-                "reference": "3c4d3a726093243a3b399be29a67da0702fb1161",
+                "url": "https://api.github.com/repos/tarantuli/medas-service-manager/zipball/2c281d9b8bc2e11edf9c80c3ec8febb76f3102fa",
+                "reference": "2c281d9b8bc2e11edf9c80c3ec8febb76f3102fa",
                 "shasum": ""
             },
             "require": {
@@ -458,27 +459,27 @@
                 "services"
             ],
             "support": {
-                "source": "https://github.com/tarantuli/medas-service-manager/tree/v4.0.14",
+                "source": "https://github.com/tarantuli/medas-service-manager/tree/v4.0.15",
                 "issues": "https://github.com/tarantuli/medas-service-manager/issues"
             },
-            "time": "2026-07-28T10:54:21+00:00"
+            "time": "2026-08-27T07:27:18+00:00"
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.13.4",
+            "version": "1.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "07d290f0c47959fd5eed98c95ee5602db07e0b6a"
+                "reference": "8680aa248f8e07bc8fb43f56f0f5fc77a0c96aae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/07d290f0c47959fd5eed98c95ee5602db07e0b6a",
-                "reference": "07d290f0c47959fd5eed98c95ee5602db07e0b6a",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/8680aa248f8e07bc8fb43f56f0f5fc77a0c96aae",
+                "reference": "8680aa248f8e07bc8fb43f56f0f5fc77a0c96aae",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1 || ^8.0"
+                "php": "^8.0"
             },
             "conflict": {
                 "doctrine/collections": "<1.6.8",
@@ -513,15 +514,15 @@
             ],
             "support": {
                 "issues": "https://github.com/myclabs/DeepCopy/issues",
-                "source": "https://github.com/myclabs/DeepCopy/tree/1.13.4"
+                "source": "https://github.com/myclabs/DeepCopy/tree/1.14.0"
             },
             "funding": [
                 {
-                    "url": "https://tidelift.com/funding/github/packagist/myclabs/deep-copy",
-                    "type": "tidelift"
+                    "url": "https://github.com/mnapoli",
+                    "type": "github"
                 }
             ],
-            "time": "2025-08-01T08:46:24+00:00"
+            "time": "2026-08-11T10:17:44+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -1882,16 +1883,16 @@
         },
         {
             "name": "sebastian/recursion-context",
-            "version": "5.0.1",
+            "version": "5.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/recursion-context.git",
-                "reference": "47e34210757a2f37a97dcd207d032e1b01e64c7a"
+                "reference": "5d32fe257a9b39cb63146924d6b4e32a22d4502a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/47e34210757a2f37a97dcd207d032e1b01e64c7a",
-                "reference": "47e34210757a2f37a97dcd207d032e1b01e64c7a",
+                "url": "https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/5d32fe257a9b39cb63146924d6b4e32a22d4502a",
+                "reference": "5d32fe257a9b39cb63146924d6b4e32a22d4502a",
                 "shasum": ""
             },
             "require": {
@@ -1934,7 +1935,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/recursion-context/issues",
                 "security": "https://github.com/sebastianbergmann/recursion-context/security/policy",
-                "source": "https://github.com/sebastianbergmann/recursion-context/tree/5.0.1"
+                "source": "https://github.com/sebastianbergmann/recursion-context/tree/5.0.2"
             },
             "funding": [
                 {
@@ -1954,7 +1955,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-08-10T07:50:56+00:00"
+            "time": "2026-08-11T05:27:39+00:00"
         },
         {
             "name": "sebastian/type",

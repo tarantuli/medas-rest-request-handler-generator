@@ -108,7 +108,7 @@ declare(strict_types=1);
 namespace {{namespace}};
 
 use Medas\Core\Interfaces\Uuid as UuidType;
-use Medas\EntityManager\{EntityManager, Hydration\ValueSetter, MetaDataManager};
+use Medas\EntityManager\{EntityManager, Hydration\ValueSetter, Hydration\WriteOperation, MetaDataManager};
 use Medas\HttpRequestHandler\{Exceptions\RequestNotAuthorized, RequestFactory};
 use Medas\RestRequestHandler\Responses\EntityResponse;
 use Medas\Routing\{Methods\Put, Parameters\Uuid, Route};
@@ -139,14 +139,14 @@ readonly class {{shortClassName}}
 
         $metaData = $this->metaDataManager->get(\{{entityClassName}}::class);
         $data = $this->requestFactory->get()->bodyData->data();
-        $data = $this->normalizer->unserializeAndDenormalize($data);
+        $data = $this->normalizer->unserializeAndDenormalize($data, WriteOperation::Update);
 
         allowElseThrow(
             $vote = new \{{updateVoteClassName}}({{instanceVariable}}, $data),
             new RequestNotAuthorized($vote->allowedAccess)
         );
 
-        $this->valueSetter->setValues($metaData, {{instanceVariable}}, $data);
+        $this->valueSetter->applyWritable($metaData, {{instanceVariable}}, $data);
         $this->entityManager->flush();
 
         $data = $this->normalizer->normalizeAndSerialize({{instanceVariable}});
@@ -167,7 +167,7 @@ declare(strict_types=1);
 
 namespace {{namespace}};
 
-use Medas\EntityManager\{EntityManager, Hydration\ValueSetter, MetaDataManager};
+use Medas\EntityManager\{EntityManager, Hydration\ValueSetter, Hydration\WriteOperation, MetaDataManager};
 use Medas\HttpRequestHandler\{Exceptions\RequestNotAuthorized, RequestFactory};
 use Medas\RestRequestHandler\Responses\EntityResponse;
 use Medas\Routing\{Methods\Put, Parameters\Integer, Route};
@@ -199,14 +199,14 @@ readonly class {{shortClassName}}
         $metaData = $this->metaDataManager->get(\{{entityClassName}}::class);
 
         $data = $this->requestFactory->get()->bodyData->data();
-        $data = $this->normalizer->unserializeAndDenormalize($data);
+        $data = $this->normalizer->unserializeAndDenormalize($data, WriteOperation::Update);
 
         allowElseThrow(
             $vote = new \{{updateVoteClassName}}({{instanceVariable}}, $data),
             new RequestNotAuthorized($vote->allowedAccess)
         );
 
-        $this->valueSetter->setValues($metaData, {{instanceVariable}}, $data);
+        $this->valueSetter->applyWritable($metaData, {{instanceVariable}}, $data);
 
         $this->entityManager->flush();
 
@@ -228,20 +228,19 @@ declare(strict_types=1);
 
 namespace {{namespace}};
 
-use Medas\EntityManager\{EntityManager, Exceptions\PropertyDoesNotExist};
+use Medas\EntityManager\{EntityManager, Hydration\ValueSetter, Hydration\WriteOperation, MetaDataManager};
 use Medas\HttpRequestHandler\{Exceptions\RequestNotAuthorized, RequestFactory};
-use Medas\RestRequestHandler\{
-    Exceptions\EntityDoesNotHaveProperty,
-    Responses\EntityResponse
-};
+use Medas\RestRequestHandler\Responses\EntityResponse;
 use Medas\Routing\{Methods\Post, Route};
 
 #[Route('{{routePath}}', endpointForEntity: \{{entityClassName}}::class)]
 readonly class {{shortClassName}}
 {
     public function __construct(
-        private EntityManager$entityManager,
+        private EntityManager $entityManager,
+        private MetaDataManager $metaDataManager,
         private RequestFactory $requestFactory,
+        private ValueSetter $valueSetter,
         private \{{normalizerClassName}} $normalizer,
     )
     {
@@ -258,12 +257,10 @@ readonly class {{shortClassName}}
             new RequestNotAuthorized($vote->allowedAccess)
         );
 
-        try {
-            {{instanceVariable}} = $this->entityManager->create(\{{entityClassName}}::class, $data);
-        }
-        catch (PropertyDoesNotExist $exception) {
-            throw new EntityDoesNotHaveProperty(\{{entityClassName}}::class, $exception->propertyName);
-        }
+        {{instanceVariable}} = $this->entityManager->create(\{{entityClassName}}::class);
+        $metaData = $this->metaDataManager->get(\{{entityClassName}}::class);
+
+        $this->valueSetter->applyWritable($metaData, {{instanceVariable}}, $data);
 
         $this->entityManager->persist({{instanceVariable}});
         $this->entityManager->flush();
@@ -456,7 +453,7 @@ declare(strict_types=1);
 namespace {{namespace}};
 
 use Medas\Core\{Attributes\PreferredDefault, Attributes\Service, Interfaces\Serializer};
-use Medas\EntityManager\{MetaData, MetaDataManager};
+use Medas\EntityManager\{Hydration\WriteOperation, MetaData, MetaDataManager};
 use Medas\RestRequestHandler\{
     Interfaces\EntityNormalizer,
     Serializers\RestSerializer
@@ -479,30 +476,38 @@ readonly class {{shortClassName}} implements EntityNormalizer
     public function normalizeAndSerialize(object $entity): array
     {
         /** @var \{{entityClassName}} $entity */
-        $data = get_object_vars($entity);
+        $data = [];
 
-        // Back-references are inverse-navigation collections, not part of the
-        // entity's own representation - drop them so they aren't serialized
-        // (and, being lazy, aren't loaded just to be discarded).
-        foreach ($this->metaData->backReferences as $backReference) {
-            unset($data[$backReference->name]);
+        foreach ($this->metaData->readableFields as $field) {
+            $value = $field->isMethod
+                ? $entity->{$field->source}()
+                : $entity->{$field->source};
+
+            $data[$field->name] = $this->serializer->serialize($value);
         }
-
-        array_walk($data, function (&$value) {
-            $value = $this->serializer->serialize($value);
-        });
 
         return $data;
     }
 
-    public function unserializeAndDenormalize(array $data): array
+    public function unserializeAndDenormalize(array $data, WriteOperation $operation = WriteOperation::Create): array
     {
-        array_walk($data, function (&$value, $name) {
-            $type = $this->metaData->property($name, ignoreUnknownProperties: true)?->type;
-            $value = $this->serializer->unserialize($value, $type);
-        });
+        $result = [];
 
-        return $data;
+        foreach ($this->metaData->writableFields as $field) {
+            if (!array_key_exists($field->name, $data)) {
+                continue;
+            }
+
+            // Honor the field's create/update scope.
+            if (!($operation === WriteOperation::Create ? $field->onCreate : $field->onUpdate)) {
+                continue;
+            }
+
+            $type = $this->metaData->property($field->source, ignoreUnknownProperties: true)?->type;
+            $result[$field->source] = $this->serializer->unserialize($data[$field->name], $type);
+        }
+
+        return $result;
     }
 }
 
