@@ -479,6 +479,10 @@ readonly class {{shortClassName}} implements EntityNormalizer
         $data = [];
 
         foreach ($this->metaData->readableFields as $field) {
+            if (!$field->isMethod && !$this->metaData->property($field->source)->reflection->isInitialized($entity)) {
+                continue;
+            }
+
             $value = $field->isMethod
                 ? $entity->{$field->source}()
                 : $entity->{$field->source};
