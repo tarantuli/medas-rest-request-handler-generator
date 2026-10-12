@@ -42,7 +42,7 @@ readonly class {{shortClassName}}
 
         allowElseThrow(
             $vote = new \{{readVoteClassName}}({{instanceVariable}}),
-            new RequestNotAuthorized($vote->allowedAccess)
+            fn() => new RequestNotAuthorized($vote->allowedAccess)
         );
 
         $data = $this->normalizer->normalizeAndSerialize({{instanceVariable}});
@@ -86,7 +86,7 @@ readonly class {{shortClassName}}
 
         allowElseThrow(
             $vote = new \{{readVoteClassName}}({{instanceVariable}}),
-            new RequestNotAuthorized($vote->allowedAccess)
+            fn() => new RequestNotAuthorized($vote->allowedAccess)
         );
 
         $data = $this->normalizer->normalizeAndSerialize({{instanceVariable}});
@@ -134,7 +134,7 @@ readonly class {{shortClassName}}
 
         allowElseThrow(
             $vote = new \{{readVoteClassName}}({{instanceVariable}}),
-            new RequestNotAuthorized($vote->allowedAccess)
+            fn() => new RequestNotAuthorized($vote->allowedAccess)
         );
 
         $metaData = $this->metaDataManager->get(\{{entityClassName}}::class);
@@ -143,7 +143,7 @@ readonly class {{shortClassName}}
 
         allowElseThrow(
             $vote = new \{{updateVoteClassName}}({{instanceVariable}}, $data),
-            new RequestNotAuthorized($vote->allowedAccess)
+            fn() => new RequestNotAuthorized($vote->allowedAccess)
         );
 
         $this->valueSetter->applyWritable($metaData, {{instanceVariable}}, $data);
@@ -193,7 +193,7 @@ readonly class {{shortClassName}}
 
         allowElseThrow(
             $vote = new \{{readVoteClassName}}({{instanceVariable}}),
-            new RequestNotAuthorized($vote->allowedAccess)
+            fn() => new RequestNotAuthorized($vote->allowedAccess)
         );
 
         $metaData = $this->metaDataManager->get(\{{entityClassName}}::class);
@@ -203,7 +203,7 @@ readonly class {{shortClassName}}
 
         allowElseThrow(
             $vote = new \{{updateVoteClassName}}({{instanceVariable}}, $data),
-            new RequestNotAuthorized($vote->allowedAccess)
+            fn() => new RequestNotAuthorized($vote->allowedAccess)
         );
 
         $this->valueSetter->applyWritable($metaData, {{instanceVariable}}, $data);
@@ -254,7 +254,7 @@ readonly class {{shortClassName}}
 
         allowElseThrow(
             $vote = new \{{createVoteClassName}}($data),
-            new RequestNotAuthorized($vote->allowedAccess)
+            fn() => new RequestNotAuthorized($vote->allowedAccess)
         );
 
         {{instanceVariable}} = $this->entityManager->create(\{{entityClassName}}::class);
@@ -306,7 +306,7 @@ readonly class {{shortClassName}}
 
         allowElseThrow(
             $vote = new \{{deleteVoteClassName}}({{instanceVariable}}),
-            new RequestNotAuthorized($vote->allowedAccess)
+            fn() => new RequestNotAuthorized($vote->allowedAccess)
         );
 
         $this->entityManager->delete({{instanceVariable}});
@@ -350,7 +350,7 @@ readonly class {{shortClassName}}
 
         allowElseThrow(
             $vote = new \{{deleteVoteClassName}}({{instanceVariable}}),
-            new RequestNotAuthorized($vote->allowedAccess)
+            fn() => new RequestNotAuthorized($vote->allowedAccess)
         );
 
         $this->entityManager->delete({{instanceVariable}});
@@ -502,7 +502,7 @@ readonly class {{shortClassName}} implements EntityNormalizer
                 continue;
             }
 
-            // Honor the field's create/update scope.
+            // Honour the field's create/update scope.
             if (!($operation === WriteOperation::Create ? $field->onCreate : $field->onUpdate)) {
                 continue;
             }
